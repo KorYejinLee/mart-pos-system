@@ -1,16 +1,17 @@
 package system;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import db.Product;
-import db.TotalSale;
 import db.User;
 import logic.ExpirationDate;
 import logic.Login;
 import logic.Sale;
+import view.SystemInput;
 import view.SystemView;
+
+import static view.SystemInput.inputNumberBetweenBy;
 
 public class System_Run {
 
@@ -27,13 +28,11 @@ public class System_Run {
         boolean worked = true;
 		boolean mainBack = false;
 
-		
-		SystemView sv = new SystemView(); // View 화면 
 		Product.settingInitProduct(10); // 초기 물품 초기화
 		product.generateInitProduct(); // 초기 물품 데이터 넣기
 
-		sv.startView();
-		sv.loginView();
+		SystemView.startView();
+		SystemView.loginView();
 		logined = login.isLogined();
 	
         while(!logined) {
@@ -47,7 +46,6 @@ public class System_Run {
 		    String inputPW = sc.nextLine().trim(); 
 			login.checkUserInfo(inputId, inputPW); // 유저 정보 체크
 			logined = login.isLogined();
-			
 
 	        if (!logined) {
 	            System.out.println("══════════════════════════════════════════");
@@ -56,26 +54,26 @@ public class System_Run {
 	        } 
         }
 
-        while (worked) {
+		while (worked) {
         	currentTime = LocalDateTime.now();
 			user.setLoginTime(currentTime);
-            sv.mainMenuView();
-            int mainKeyCode = sv.getMainKeyCode();
-            if (mainKeyCode == 1) { 
+            SystemView.mainMenuView();
+			int inputValue = SystemInput.inputNumberBetweenBy(1, 6);
+            if (inputValue == 1) {
 				product.showProduct();
-			} else if (mainKeyCode == 2) {
-				sv.balanceView();
+			} else if (inputValue == 2) {
+				SystemView.balanceView();
 				sale.showBalance();
-			} else if (mainKeyCode == 3) { 
+			} else if (inputValue == 3) {
 				sale.showSale();
-			} else if (mainKeyCode == 4) { 
+			} else if (inputValue == 4) {
 				ed.showRemainingTime();
-			} else if (mainKeyCode == 5) {
+			} else if (inputValue == 5) {
 				mainBack = false;
 				while (!mainBack) {
-					sv.subMenuView();
-					int subKeyCode = sv.getSubKeyCode();
-					switch (subKeyCode) {
+					SystemView.subMenuView();
+					inputValue = SystemInput.inputNumberBetweenBy(1, 5);
+					switch (inputValue) {
 	                case 1:
 	                	sale.saleMenu();
 	                    break;
@@ -99,7 +97,7 @@ public class System_Run {
 	                    break;
 					}
 				}
-			} else if (mainKeyCode == 6) {
+			} else if (inputValue == 6) {
 				currentTime = LocalDateTime.now();
 				user.setLogOutTime(currentTime); 
 				

@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import db.Product;
 import db.TotalSale;
+import view.SystemInput;
 import view.SystemView;
 
 public class Sale extends TotalSale {
@@ -16,7 +17,6 @@ public class Sale extends TotalSale {
 		// TODO Auto-generated constructor stub
 	}
 
-	SystemView sv = new SystemView();
 	private boolean backSubMenued = false;
 	private boolean isValidCardNumber = false;
 	private boolean continueSale = true;
@@ -41,9 +41,9 @@ public class Sale extends TotalSale {
 		isValidCardNumber = false;
 		continueSale = true;
 		while (!backSubMenued) {
-			sv.saleMenuView();
-			int saleKeyCode = sv.getSaleKeyCode();
-			switch (saleKeyCode) {
+			SystemView.saleMenuView();
+			int inputValue = SystemInput.inputNumberBetweenBy(1, 3);
+			switch (inputValue) {
 				case 1:
 					saleCard();
 					break;

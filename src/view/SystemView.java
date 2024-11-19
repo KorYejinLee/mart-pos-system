@@ -1,9 +1,7 @@
 package view;
 
-import java.util.Scanner;
-
 public class SystemView {
-	public void loginView() {
+	public static void loginView() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║                 로그인                   ║");
@@ -11,7 +9,7 @@ public class SystemView {
         System.out.println("╚════════════════════════════════════════╝");
 	}
 
-	public void startView() {
+	public static void startView() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║            Mart POS System             ║");
@@ -19,7 +17,7 @@ public class SystemView {
         System.out.println("╚════════════════════════════════════════╝");
 	}
 	
-	public void balanceView() {
+	public static void balanceView() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║                Balance                 ║");
@@ -27,7 +25,7 @@ public class SystemView {
         System.out.println("╚════════════════════════════════════════╝");
 	}
 	
-	public void mainMenuView() {
+	public static void mainMenuView() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║                Main Menu               ║");
@@ -40,7 +38,7 @@ public class SystemView {
         System.out.println("══════════════════════════════════════════");
 	}
 	
-	public void subMenuView() {
+	public static void subMenuView() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║             Start Work Menu            ║");
@@ -55,7 +53,7 @@ public class SystemView {
         System.out.println("══════════════════════════════════════════");
 	}
 	
-	public void saleMenuView() {
+	public static void saleMenuView() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║              Sale Product              ║");
@@ -64,93 +62,6 @@ public class SystemView {
         System.out.println("══════════════════════════════════════════");
         System.out.println("        [1] 카드 [2] 현금 [3] 돌아가기");
         System.out.println("══════════════════════════════════════════");
-	}
-	
-	public int getMainKeyCode() {
-    	Scanner sc = new Scanner(System.in);
-    	int inputValue = 0;
-    	
-    	while(true) {
-	        try {
-	            System.out.println("══════════════════════════════════════════");
-	            System.out.println(            "메뉴 선택를 선택해주세요."); // 사용자 입력 프롬프트
-	            System.out.println("══════════════════════════════════════════");
-	            inputValue = Integer.parseInt(sc.nextLine().trim()); // 엔터 체크
-	            if (inputValue < 1 || inputValue > 6) {
-		            System.out.println("══════════════════════════════════════════");
-	                System.out.println("         1 ~ 6 사이의 숫자를 입력해주세요.");
-		            System.out.println("══════════════════════════════════════════");
-
-	            } else {
-	                break; // 올바른 값이면 반복문 종료
-	            }
-	        } catch (NumberFormatException e) {
-	            System.out.println("══════════════════════════════════════════");
-	            System.out.println("              숫자를 입력해주세요.");
-	            System.out.println("══════════════════════════════════════════");
-	            sc.nextLine().trim(); // 입력 버퍼를 비워준다
-	        }
-	    }
-    	
-		return inputValue;
-	}
-	
-	public int getSubKeyCode() {
-    	Scanner sc = new Scanner(System.in);
-    	int inputValue = 0;
-    	
-    	while(true) {
-	        try {
-	            System.out.println("══════════════════════════════════════════");
-	            System.out.println(            "메뉴 선택를 선택해주세요."); // 사용자 입력 프롬프트
-	            System.out.println("══════════════════════════════════════════");
-	            inputValue = Integer.parseInt(sc.nextLine().trim()); // 엔터 체크
-	            if (inputValue < 1 || inputValue > 5) {
-		            System.out.println("══════════════════════════════════════════");
-	                System.out.println("         1 ~ 5 사이의 숫자를 입력해주세요.");
-		            System.out.println("══════════════════════════════════════════");
-
-	            } else {
-	                break; // 올바른 값이면 반복문 종료
-	            }
-	        } catch (NumberFormatException e) {
-	            System.out.println("══════════════════════════════════════════");
-	            System.out.println("              숫자를 입력해주세요.");
-	            System.out.println("══════════════════════════════════════════");
-	            sc.nextLine().trim(); // 입력 버퍼를 비워준다
-	        }
-	    }
-    	
-		return inputValue;
-	}
-	
-	public int getSaleKeyCode() {
-    	Scanner sc = new Scanner(System.in);
-    	int inputValue = 0;
-    	
-    	while(true) {
-	        try {
-	            System.out.println("══════════════════════════════════════════");
-	            System.out.println(            "메뉴 선택를 선택해주세요."); // 사용자 입력 프롬프트
-	            System.out.println("══════════════════════════════════════════");
-	            inputValue = Integer.parseInt(sc.nextLine().trim()); // 엔터 체크
-	            if (inputValue < 1 || inputValue > 3) {
-		            System.out.println("══════════════════════════════════════════");
-	                System.out.println("         1 ~ 3 사이의 숫자를 입력해주세요.");
-		            System.out.println("══════════════════════════════════════════");
-
-	            } else {
-	                break; // 올바른 값이면 반복문 종료
-	            }
-	        } catch (NumberFormatException e) {
-	            System.out.println("══════════════════════════════════════════");
-	            System.out.println("              숫자를 입력해주세요.");
-	            System.out.println("══════════════════════════════════════════");
-	            sc.nextLine().trim(); // 입력 버퍼를 비워준다
-	        }
-	    }
-    	
-		return inputValue;
 	}
 }
 
