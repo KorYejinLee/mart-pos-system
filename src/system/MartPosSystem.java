@@ -13,7 +13,7 @@ import view.SystemView;
 
 import static view.SystemInput.inputNumberBetweenBy;
 
-public class System_Run {
+public class MartPosSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
