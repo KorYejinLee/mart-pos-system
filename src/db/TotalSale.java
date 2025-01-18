@@ -2,7 +2,7 @@ package db;
 
 import java.time.LocalDateTime;
 
-public class TotalSale extends Product {
+public class TotalSale extends Products {
 	public TotalSale(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
 			LocalDateTime _expirationDate) {
 		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);

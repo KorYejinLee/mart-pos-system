@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import db.Product;
+
 import db.TotalSale;
 import view.SystemInput;
 import view.SystemView;
@@ -103,10 +103,10 @@ public class Sale extends TotalSale {
 			System.out.println("══════════════════════════════════════════");
 			int inputProductAmount = Integer.parseInt(sc.nextLine().trim());
 			boolean productFound = false;
-			for (int i = 0; i < getProductes().length; ++i) {
-				if (getProductes()[i] != null && getProductes()[i].getProductName().equals(inputProductName)) {
-					if (inputProductAmount <= getProductes()[i].getProductAmount()) {
-						if (getProductes()[i].getProductName().equals("술") || getProductes()[i].getProductName().equals("담배")) {
+			for (int i = 0; i < getProducts().length; ++i) {
+				if (getProducts()[i] != null && getProducts()[i].getProductName().equals(inputProductName)) {
+					if (inputProductAmount <= getProducts()[i].getProductAmount()) {
+						if (getProducts()[i].getProductName().equals("술") || getProducts()[i].getProductName().equals("담배")) {
 							System.out.println("══════════════════════════════════════════");
 				            System.out.println("     생년월일을 입력해주세요. (예 : 20240616) : ");
 							System.out.println("══════════════════════════════════════════");
@@ -117,8 +117,8 @@ public class Sale extends TotalSale {
 								System.out.println("══════════════════════════════════════════");
 					            System.out.println("            성인 인증이 완료되었습니다. ");
 								System.out.println("══════════════════════════════════════════");
-								getProductes()[i].setProductAmount(getProductes()[i].getProductAmount() - inputProductAmount);
-								addSale(inputProductAmount * getProductes()[i].getProductPrice());
+								getProducts()[i].setProductAmount(getProducts()[i].getProductAmount() - inputProductAmount);
+								addSale(inputProductAmount * getProducts()[i].getProductPrice());
 								System.out.println("══════════════════════════════════════════");
 								System.out.println(inputProductName + "가(이) " + inputProductAmount + "개 판매 되었습니다.");
 								System.out.println("══════════════════════════════════════════");
@@ -134,8 +134,8 @@ public class Sale extends TotalSale {
 								System.out.println("══════════════════════════════════════════");
 							}
 						} else {
-							getProductes()[i].setProductAmount(getProductes()[i].getProductAmount() - inputProductAmount);
-							addSale(inputProductAmount * getProductes()[i].getProductPrice());
+							getProducts()[i].setProductAmount(getProducts()[i].getProductAmount() - inputProductAmount);
+							addSale(inputProductAmount * getProducts()[i].getProductPrice());
 							System.out.println("══════════════════════════════════════════");
 							System.out.println(inputProductName + "가(이) " + inputProductAmount + "개 판매 되었습니다.");
 							System.out.println("══════════════════════════════════════════");
@@ -148,7 +148,7 @@ public class Sale extends TotalSale {
 						}
 					} else {
 						System.out.println("══════════════════════════════════════════");
-			            System.out.printf("         %s의 재고는 %d(개) 입니다.\n",inputProductName, getProductes()[i].getProductAmount());
+			            System.out.printf("         %s의 재고는 %d(개) 입니다.\n",inputProductName, getProducts()[i].getProductAmount());
 						System.out.println("══════════════════════════════════════════");
 					}
 				}
@@ -180,10 +180,10 @@ public class Sale extends TotalSale {
 			System.out.println("══════════════════════════════════════════");
 			int inputProductAmount = Integer.parseInt(sc.nextLine().trim());
 			boolean productFound = false;
-			for (int i = 0; i < getProductes().length; ++i) {
-				if (getProductes()[i] != null && getProductes()[i].getProductName().equals(inputProductName)) {
-					if (inputProductAmount <= getProductes()[i].getProductAmount()) {
-						if (getProductes()[i].getProductName().equals("술") || getProductes()[i].getProductName().equals("담배")) {
+			for (int i = 0; i < getProducts().length; ++i) {
+				if (getProducts()[i] != null && getProducts()[i].getProductName().equals(inputProductName)) {
+					if (inputProductAmount <= getProducts()[i].getProductAmount()) {
+						if (getProducts()[i].getProductName().equals("술") || getProducts()[i].getProductName().equals("담배")) {
 							System.out.println("══════════════════════════════════════════");
 				            System.out.println("     생년월일을 입력해주세요. (예 : 20240616) : ");
 							System.out.println("══════════════════════════════════════════");
@@ -202,18 +202,18 @@ public class Sale extends TotalSale {
 									System.out.println("══════════════════════════════════════════");
 							        System.out.println("               잔고가 부족합니다.");
 									System.out.println("══════════════════════════════════════════");
-								} else if (inputProductBill < inputProductAmount * getProductes()[i].getProductPrice()) {
+								} else if (inputProductBill < inputProductAmount * getProducts()[i].getProductPrice()) {
 									System.out.println("══════════════════════════════════════════");
 							        System.out.println("          현금이 구매할 금액보다 작습니다.");
 									System.out.println("══════════════════════════════════════════");
 								} else {
-									int change = inputProductBill - (inputProductAmount * getProductes()[i].getProductPrice());
+									int change = inputProductBill - (inputProductAmount * getProducts()[i].getProductPrice());
 									System.out.println("══════════════════════════════════════════");
 							        System.out.println("       거스름돈은" + change + "원 입니다." );
 									System.out.println("══════════════════════════════════════════");
-									getProductes()[i].setProductAmount(getProductes()[i].getProductAmount() - inputProductAmount);
-									addSale(inputProductAmount * getProductes()[i].getProductPrice());
-									addBalance(inputProductAmount * getProductes()[i].getProductPrice());
+									getProducts()[i].setProductAmount(getProducts()[i].getProductAmount() - inputProductAmount);
+									addSale(inputProductAmount * getProducts()[i].getProductPrice());
+									addBalance(inputProductAmount * getProducts()[i].getProductPrice());
 									System.out.println("══════════════════════════════════════════");
 									System.out.println(inputProductName + "가(이) " + inputProductAmount + "개 판매 되었습니다.");
 									System.out.println("══════════════════════════════════════════");
@@ -235,18 +235,18 @@ public class Sale extends TotalSale {
 								System.out.println("══════════════════════════════════════════");
 						        System.out.println("               잔고가 부족합니다.");
 								System.out.println("══════════════════════════════════════════");
-							} else if (inputProductBill < inputProductAmount * getProductes()[i].getProductPrice()) {
+							} else if (inputProductBill < inputProductAmount * getProducts()[i].getProductPrice()) {
 								System.out.println("══════════════════════════════════════════");
 						        System.out.println("          현금이 구매할 금액보다 작습니다.");
 								System.out.println("══════════════════════════════════════════");
 							} else {
-								int change = inputProductBill - (inputProductAmount * getProductes()[i].getProductPrice());
+								int change = inputProductBill - (inputProductAmount * getProducts()[i].getProductPrice());
 								System.out.println("══════════════════════════════════════════");
 						        System.out.println("       거스름돈은" + change + "원 입니다." );
 								System.out.println("══════════════════════════════════════════");
-								getProductes()[i].setProductAmount(getProductes()[i].getProductAmount() - inputProductAmount);
-								addSale(inputProductAmount * getProductes()[i].getProductPrice());
-								addBalance(inputProductAmount * getProductes()[i].getProductPrice());
+								getProducts()[i].setProductAmount(getProducts()[i].getProductAmount() - inputProductAmount);
+								addSale(inputProductAmount * getProducts()[i].getProductPrice());
+								addBalance(inputProductAmount * getProducts()[i].getProductPrice());
 								System.out.println("══════════════════════════════════════════");
 								System.out.println(inputProductName + "가(이) " + inputProductAmount + "개 판매 되었습니다.");
 								System.out.println("══════════════════════════════════════════");
@@ -256,7 +256,7 @@ public class Sale extends TotalSale {
 						}
 					} else {
 						System.out.println("══════════════════════════════════════════");
-			            System.out.printf("         %s의 재고는 %d(개) 입니다.\n",inputProductName, getProductes()[i].getProductAmount());
+			            System.out.printf("         %s의 재고는 %d(개) 입니다.\n",inputProductName, getProducts()[i].getProductAmount());
 						System.out.println("══════════════════════════════════════════");
 					}
 				}
@@ -309,14 +309,14 @@ public class Sale extends TotalSale {
             System.out.println("══════════════════════════════════════════");
 	        int inputProductAmount = Integer.parseInt(sc.next());	        
 	        boolean productFound = false;
-	        for (int i = 0; i < getProductes().length; ++i) {
+	        for (int i = 0; i < getProducts().length; ++i) {
 	            if (getProducts()[i] != null && getProducts()[i].getProductName().equals(inputProductName)) {
 	                for (int j = 0; j < saleProductNames.length; ++j) {
 	                    if (saleProductNames[j] != null && saleProductNames[j].equals(inputProductName)) {
 	                        if (inputProductAmount <= saleProductAmountes[j]) {
 	                            // Perform refund
-	                            getProducts()[i].setProductAmount(getProducts()[i].getProductAmount() + inputProductAmount);
-	                            minSale(inputProductAmount * getProductes()[i].getProductPrice());
+								getProducts()[i].setProductAmount(getProducts()[i].getProductAmount() + inputProductAmount);
+	                            minSale(inputProductAmount * getProducts()[i].getProductPrice());
 	                            System.out.println("══════════════════════════════════════════");
 	                            System.out.println(inputProductName + "가(이) " + inputProductAmount + "개 환불 되었습니다.");
 	                            System.out.println("══════════════════════════════════════════");

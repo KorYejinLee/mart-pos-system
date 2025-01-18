@@ -3,7 +3,7 @@ package system;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import db.Product;
+import db.Products;
 import db.User;
 import logic.ExpirationDate;
 import logic.Login;
@@ -11,13 +11,11 @@ import logic.Sale;
 import view.SystemInput;
 import view.SystemView;
 
-import static view.SystemInput.inputNumberBetweenBy;
-
 public class MartPosSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Product product = new Product(null, 0, 0, false, null);
+		Products products = new Products(null, 0, 0, false, null);
 		User user = new User();
 		Login login = new Login();
 		LocalDateTime currentTime;
@@ -28,8 +26,8 @@ public class MartPosSystem {
         boolean worked = true;
 		boolean mainBack = false;
 
-		Product.settingInitProduct(10); // 초기 물품 초기화
-		product.generateInitProduct(); // 초기 물품 데이터 넣기
+		Products.settingInitProduct(10); // 초기 물품 초기화
+		products.generateInitProduct(); // 초기 물품 데이터 넣기
 
 		SystemView.startView();
 		SystemView.loginView();
@@ -60,7 +58,7 @@ public class MartPosSystem {
             SystemView.mainMenuView();
 			int inputValue = SystemInput.inputNumberBetweenBy(1, 6);
             if (inputValue == 1) {
-				product.showProduct();
+				products.showProduct();
 			} else if (inputValue == 2) {
 				SystemView.balanceView();
 				sale.showBalance();
@@ -83,7 +81,7 @@ public class MartPosSystem {
 	                case 3:
 	                    break;
 	                case 4: 
-	                	product.searchProductByName();
+	                	products.searchProductByName();
 	                case 5:
 	                    System.out.println("══════════════════════════════════════════");
 	                    System.out.println("              메인 메뉴로 돌아갑니다.");
@@ -113,7 +111,7 @@ public class MartPosSystem {
 			    System.out.println("══════════════════════════════════════════");
 				System.out.printf("               일당 : %s (원)\n",user.getDailyWage());
 			    System.out.println("══════════════════════════════════════════");
-				product.printProductStar();
+				products.printProductStar();
 				worked = false;
 			}
         }

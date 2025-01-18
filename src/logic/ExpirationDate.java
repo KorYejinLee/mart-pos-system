@@ -3,9 +3,9 @@ package logic;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import db.Product;
+import db.Products;
 
-public class ExpirationDate extends Product {
+public class ExpirationDate extends Products {
 
 	public ExpirationDate(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
 			LocalDateTime _expirationDate) {
@@ -18,14 +18,14 @@ public class ExpirationDate extends Product {
 	   System.out.println("                  유통기한");
 	   System.out.println("══════════════════════════════════════════");
        System.out.printf("%-10s\t%s\t\n", "상품명", "유통기한");
-       for (Product product : getProductes()) {
-           LocalDateTime expirationDateTime = product.getExpirationDate();
+       for (Products products : getProducts()) {
+           LocalDateTime expirationDateTime = products.getExpirationDate();
            if (expirationDateTime != null) {
                Duration remainingTime = Duration.between(LocalDateTime.now(), expirationDateTime);
 
                if (remainingTime.isNegative() || remainingTime.isZero()) {
                    System.out.println("══════════════════════════════════════════");
-                   System.out.printf("%-10s\t유통기한 만료\n", product.getProductName());
+                   System.out.printf("%-10s\t유통기한 만료\n", products.getProductName());
                    System.out.println("══════════════════════════════════════════");
                } else {
                    long days = remainingTime.toDays();
@@ -34,7 +34,7 @@ public class ExpirationDate extends Product {
                    long seconds = remainingTime.getSeconds() % 60;
 
                    System.out.println("══════════════════════════════════════════");
-                   System.out.printf("%-10s\t%d시간 %d분 %d초 남았습니다.\n", product.getProductName(), hours, minutes, seconds);
+                   System.out.printf("%-10s\t%d시간 %d분 %d초 남았습니다.\n", products.getProductName(), hours, minutes, seconds);
                    System.out.println("══════════════════════════════════════════");
                }
            }
