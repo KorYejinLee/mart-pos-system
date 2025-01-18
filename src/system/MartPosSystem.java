@@ -11,22 +11,25 @@ import logic.Sale;
 import view.SystemInput;
 import view.SystemView;
 
+import static db.Products.setInitProductsSize;
+
 public class MartPosSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		setInitProductsSize(10);
+
 		Products products = new Products(null, 0, 0, false, null);
 		User user = new User();
 		Login login = new Login();
 		LocalDateTime currentTime;
 		Sale sale = new Sale(null, 0, 0, false, null);
 		ExpirationDate ed = new ExpirationDate(null, 0, 0, false, null);
-		Scanner sc = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		boolean logined = login.isLogined();
         boolean worked = true;
 		boolean mainBack = false;
 
-		Products.settingInitProduct(10); // 초기 물품 초기화
 		products.generateInitProduct(); // 초기 물품 데이터 넣기
 
 		SystemView.startView();
@@ -37,11 +40,11 @@ public class MartPosSystem {
         	System.out.println("══════════════════════════════════════════");
 		    System.out.println("              ID를 입력해주세요.");
 		    System.out.println("══════════════════════════════════════════");
-		    String inputId = sc.nextLine().trim(); 
+		    String inputId = scanner.nextLine().trim();
 		    System.out.println("══════════════════════════════════════════");
 		    System.out.println("           PASSWORD를 입력해주세요.");
 		    System.out.println("══════════════════════════════════════════");
-		    String inputPW = sc.nextLine().trim(); 
+		    String inputPW = scanner.nextLine().trim();
 			login.checkUserInfo(inputId, inputPW); // 유저 정보 체크
 			logined = login.isLogined();
 

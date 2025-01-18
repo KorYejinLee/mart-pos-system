@@ -28,8 +28,8 @@ public class Products {
       this.expirationDate = _expirationDate;
    }
    
-   public static void settingInitProduct (int _setSize) {
-      size = _setSize;
+   public static void setInitProductsSize(int setSize) {
+      size = setSize;
 	  productes = new Products[size];
    }
    
