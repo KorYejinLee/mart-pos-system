@@ -1,12 +1,11 @@
 package db;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Product {
-   private static Product[] productes;
+public class Products {
+   private static Products[] productes;
    private static int size; // 객체 배열 Product 크기
    private String productName; // 물품 이름
    private int productPrice; // 물품 가격
@@ -21,7 +20,7 @@ public class Product {
    private int[] productAmounts = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
    private boolean[] inItProhibetedes = {true, true, false, false, false, false, false, false, false, false};
    
-   public Product (String _productName, int _productPrice, int _productAmount, boolean _isProhibited, LocalDateTime _expirationDate) {
+   public Products(String _productName, int _productPrice, int _productAmount, boolean _isProhibited, LocalDateTime _expirationDate) {
       this.productName = _productName;
       this.productPrice = _productPrice;
       this.productAmount = _productAmount;
@@ -29,53 +28,73 @@ public class Product {
       this.expirationDate = _expirationDate;
    }
    
-   public static void settingInitProduct (int _setSize) {
-      size = _setSize;
-	  productes = new Product[size];
+   public static void setInitProductsSize(int setSize) {
+      size = setSize;
+	  productes = new Products[size];
    }
    
    public static void settingSize() {
 	   size++;
-	   productes = new Product[size];
+	   productes = new Products[size];
+   }
+   
+   public static Products[] getProducts() {
+	return productes;
+   }
+   
+	public void setProducts(Products[] products) {
+		this.productes = products;
+	}
+   
+   public static void setProductes(Products[] productes) {
+	   Products.productes = productes;
    }
    
    public void generateInitProduct() {
       this.expirationDate = LocalDateTime.now();
       for (int i = 0; i < 10; ++i) {
-         productes[i] = new Product(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], this.expirationDate);
+         productes[i] = new Products(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], this.expirationDate);
          if(productNames[i].equals("우유") || productNames[i].equals("두부")) {
-            productes[i] = new Product(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], this.expirationDate.plusDays(1));
+            productes[i] = new Products(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], this.expirationDate.plusDays(1));
          } else if(productNames[i].equals("어묵")) {
-            productes[i] = new Product(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], this.expirationDate.plusHours(1));
+            productes[i] = new Products(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], this.expirationDate.plusHours(1));
          } else {
-        	 productes[i] = new Product(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], null);
+        	 productes[i] = new Products(this.productNames[i], this.productPrices[i], this.productAmounts[i], this.inItProhibetedes[i], null);
          }
       }
    }
-   
+
    public void showProduct() {
        System.out.println("════════════════════════════════════════════════════════════════════════════════════");
        System.out.printf("%-10s\t%-10s\t%-10s\t%-10s\t%-10s\t\n","상품명","상품가격","상품갯수","청소년 판매여부","유통기한");
-       System.out.println("════════════════════════════════════════════════════════════════════════════════════");     
-       for (Product product : productes) {
-		   System.out.println(product);
+       System.out.println("════════════════════════════════════════════════════════════════════════════════════");
+       for (Products products : productes) {
+		   System.out.println(products);
 	   }
 	   System.out.println("════════════════════════════════════════════════════════════════════════════════════");
 
    }
+
+	public int[] getProductAmounts() {
+		return productAmounts;
+	}
+
+	public void setProductAmounts(int[] productAmounts) {
+		this.productAmounts = productAmounts;
+	}
    
    public void printProductStar() {
 		System.out.println("══════════════════════════════════════════");
-   	for (Product product : productes) {
-   	    System.out.print(product.getProductName() + " ");
-   	    for (int i = 0; i < product.getProductAmount(); i++) {
+   	for (Products products : productes) {
+   	    System.out.print(products.getProductName() + " ");
+   	    for (int i = 0; i < products.getProductAmount(); i++) {
    	        System.out.print("*");
    	    }
    	    System.out.println();
    	}
 	System.out.println("══════════════════════════════════════════");
    }
-   
+
    public void searchProductByName() {
        Scanner scanner = new Scanner(System.in);
    	   System.out.println("══════════════════════════════════════════");
@@ -84,12 +103,12 @@ public class Product {
        String searchName = scanner.nextLine();
        boolean found = false;
 
-       for (Product product : productes) {
-           if (product.getProductName().equalsIgnoreCase(searchName)) {
+       for (Products products : productes) {
+           if (products.getProductName().equalsIgnoreCase(searchName)) {
                System.out.println("════════════════════════════════════════════════════════════════════════════════════");
                System.out.printf("%-10s\t%-10s\t%-10s\t%-10s\t%-10s\t\n","상품명","상품가격","상품갯수","청소년 판매여부","유통기한");
                System.out.println("════════════════════════════════════════════════════════════════════════════════════");
-               System.out.println(product);
+               System.out.println(products);
                System.out.println("════════════════════════════════════════════════════════════════════════════════════");
                found = true;
                break;
@@ -102,31 +121,6 @@ public class Product {
        	   System.out.println("══════════════════════════════════════════");
        }
    }
-
-   
-   public Product[] getProducts() {
-		return productes;
-	}
-
-	public void setProducts(Product[] products) {
-		this.productes = products;
-	}
-
-	public int[] getProductAmounts() {
-		return productAmounts;
-	}
-
-	public void setProductAmounts(int[] productAmounts) {
-		this.productAmounts = productAmounts;
-	}
-   
-   public static Product[] getProductes() {
-	return productes;
-   }
-
-   public static void setProductes(Product[] productes) {
-	   Product.productes = productes;
-   }	
 
    public String getProductName() {
 	   return productName;

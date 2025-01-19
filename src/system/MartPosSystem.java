@@ -3,7 +3,7 @@ package system;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import db.Product;
+import db.Products;
 import db.User;
 import logic.ExpirationDate;
 import logic.Login;
@@ -11,25 +11,26 @@ import logic.Sale;
 import view.SystemInput;
 import view.SystemView;
 
-import static view.SystemInput.inputNumberBetweenBy;
+import static db.Products.setInitProductsSize;
 
-public class System_Run {
+public class MartPosSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Product product = new Product(null, 0, 0, false, null);
+		setInitProductsSize(10);
+
+		Products products = new Products(null, 0, 0, false, null);
 		User user = new User();
 		Login login = new Login();
 		LocalDateTime currentTime;
 		Sale sale = new Sale(null, 0, 0, false, null);
 		ExpirationDate ed = new ExpirationDate(null, 0, 0, false, null);
-		Scanner sc = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		boolean logined = login.isLogined();
         boolean worked = true;
 		boolean mainBack = false;
 
-		Product.settingInitProduct(10); // 초기 물품 초기화
-		product.generateInitProduct(); // 초기 물품 데이터 넣기
+		products.generateInitProduct(); // 초기 물품 데이터 넣기
 
 		SystemView.startView();
 		SystemView.loginView();
@@ -39,11 +40,11 @@ public class System_Run {
         	System.out.println("══════════════════════════════════════════");
 		    System.out.println("              ID를 입력해주세요.");
 		    System.out.println("══════════════════════════════════════════");
-		    String inputId = sc.nextLine().trim(); 
+		    String inputId = scanner.nextLine().trim();
 		    System.out.println("══════════════════════════════════════════");
 		    System.out.println("           PASSWORD를 입력해주세요.");
 		    System.out.println("══════════════════════════════════════════");
-		    String inputPW = sc.nextLine().trim(); 
+		    String inputPW = scanner.nextLine().trim();
 			login.checkUserInfo(inputId, inputPW); // 유저 정보 체크
 			logined = login.isLogined();
 
@@ -60,7 +61,7 @@ public class System_Run {
             SystemView.mainMenuView();
 			int inputValue = SystemInput.inputNumberBetweenBy(1, 6);
             if (inputValue == 1) {
-				product.showProduct();
+				products.showProduct();
 			} else if (inputValue == 2) {
 				SystemView.balanceView();
 				sale.showBalance();
@@ -83,7 +84,7 @@ public class System_Run {
 	                case 3:
 	                    break;
 	                case 4: 
-	                	product.searchProductByName();
+	                	products.searchProductByName();
 	                case 5:
 	                    System.out.println("══════════════════════════════════════════");
 	                    System.out.println("              메인 메뉴로 돌아갑니다.");
@@ -113,7 +114,7 @@ public class System_Run {
 			    System.out.println("══════════════════════════════════════════");
 				System.out.printf("               일당 : %s (원)\n",user.getDailyWage());
 			    System.out.println("══════════════════════════════════════════");
-				product.printProductStar();
+				products.printProductStar();
 				worked = false;
 			}
         }
