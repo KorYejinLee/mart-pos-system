@@ -13,8 +13,7 @@ public class Products {
     private int productPrice; // 물품 가격
     private int productAmount; // 물품 갯수
     private boolean isProhibited; // 19금 물품 유무
-    private LocalDateTime expirationDate;
-// 유통기한
+    private LocalDateTime expirationDate; // 유통기한
 
     // 생성자를 private화 하여 외부에서 생성자 호출 차단
     private Products(String productName, int productPrice, int productAmount, boolean isProhibited, LocalDateTime expirationDate) {
