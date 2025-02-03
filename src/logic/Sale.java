@@ -76,10 +76,10 @@ public class Sale extends TotalSale {
 	            System.out.println("══════════════════════════════════════════");
 	        } else {
 	        	String firstFourDigits = cardNumber.split("-")[0];
-	        		for (int i = 0; i < cardNumes.length; ++i) {
-	        			if (firstFourDigits.equals(cardNumes[i])) {
+	        		for (int cardIndex = 0; cardIndex < cardNumes.length; ++cardIndex) {
+	        			if (firstFourDigits.equals(cardNumes[cardIndex])) {
 	        				saleCardNumes[saleIndex] = cardNumber;
-	        				cardName = cardNames[i];
+	        				cardName = cardNames[cardIndex];
 	        		        System.out.println("══════════════════════════════════════════");
 	        		        System.out.println("            카드 이름:" + cardName);
 	        		        System.out.println("══════════════════════════════════════════");
