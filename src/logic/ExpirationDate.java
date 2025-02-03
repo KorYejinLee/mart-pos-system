@@ -5,13 +5,15 @@ import java.time.LocalDateTime;
 
 import db.Products;
 
-public class ExpirationDate extends Products {
+import static db.Products.getProducts;
 
-	public ExpirationDate(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
-			LocalDateTime _expirationDate) {
-		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);
-		// TODO Auto-generated constructor stub
-	}
+public class ExpirationDate  {
+
+//	public ExpirationDate(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
+//			LocalDateTime _expirationDate) {
+//		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);
+//		// TODO Auto-generated constructor stub
+//	}
 	
    public void showRemainingTime() {
 	   System.out.println("══════════════════════════════════════════");

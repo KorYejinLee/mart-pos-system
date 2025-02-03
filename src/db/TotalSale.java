@@ -2,12 +2,12 @@ package db;
 
 import java.time.LocalDateTime;
 
-public class TotalSale extends Products {
-	public TotalSale(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
-			LocalDateTime _expirationDate) {
-		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);
-		// TODO Auto-generated constructor stub
-	}
+public class TotalSale {
+//	public TotalSale(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
+//			LocalDateTime _expirationDate) {
+//		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	private int revenueTotal = 0;
 	private int balance = 395_000;

@@ -9,13 +9,15 @@ import db.TotalSale;
 import view.SystemInput;
 import view.SystemView;
 
+import static db.Products.getProducts;
+
 public class Sale extends TotalSale {
 	
-	public Sale(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
-			LocalDateTime _expirationDate) {
-		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);
-		// TODO Auto-generated constructor stub
-	}
+//	public Sale(String _productName, int _productPrice, int _productAmount, boolean _isProhibited,
+//			LocalDateTime _expirationDate) {
+//		super(_productName, _productPrice, _productAmount, _isProhibited, _expirationDate);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	private boolean backSubMenued = false;
 	private boolean isValidCardNumber = false;
