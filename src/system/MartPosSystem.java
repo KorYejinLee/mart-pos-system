@@ -26,15 +26,15 @@ public class MartPosSystem {
 //		Sale sale = new Sale(null, 0, 0, false, null);
 //		ExpirationDate ed = new ExpirationDate(null, 0, 0, false, null);
 		Scanner scanner = new Scanner(System.in);
-		boolean logined = login.isLogined();
-		boolean worked = true;
-		boolean mainBack = false;
+		boolean isUserlogined = login.isLogined();
+		boolean isWorking = true;
+		boolean isMainMenuReturned = false;
 
 		SystemView.startView();
 		SystemView.loginView();
-		logined = login.isLogined();
+		isUserlogined = login.isLogined();
 
-		while(!logined) {
+		while(!isUserlogined) {
 			System.out.println("══════════════════════════════════════════");
 			System.out.println("              ID를 입력해주세요.");
 			System.out.println("══════════════════════════════════════════");
@@ -44,38 +44,37 @@ public class MartPosSystem {
 			System.out.println("══════════════════════════════════════════");
 			String inputPW = scanner.nextLine().trim();
 			login.checkUserInfo(inputId, inputPW); // 유저 정보 체크
-			logined = login.isLogined();
+			isUserlogined = login.isLogined();
 
-			if (!logined) {
+			if (!isUserlogined) {
 				System.out.println("══════════════════════════════════════════");
 				System.out.printf("%16s로그인 실패%-16s\n","","");
 				System.out.println("══════════════════════════════════════════");
 			}
 		}
 
-		while (worked) {
+		while (isWorking) {
 			currentTime = LocalDateTime.now();
 			user.setLoginTime(currentTime);
 			SystemView.mainMenuView();
-			int inputValue = SystemInput.inputNumberBetweenBy(1, 6);
-			if (inputValue == 1) {
+			int mainMenuInput = SystemInput.inputNumberBetweenBy(1, 6);
+			if (mainMenuInput == 1) {
 				showProducts(products);
-			} else if (inputValue == 2) {
+			} else if (mainMenuInput == 2) {
 				SystemView.balanceView();
 //				showBalance();
-			} else if (inputValue == 3) {
+			} else if (mainMenuInput == 3) {
 //				showSale();
-			} else if (inputValue == 4) {
+			} else if (mainMenuInput == 4) {
 //				showRemainingTime();
-			} else if (inputValue == 5) {
-				mainBack = false;
-				while (!mainBack) {
+			} else if (mainMenuInput == 5) {
+				isMainMenuReturned = false;
+				while (!isMainMenuReturned) {
 					SystemView.subMenuView();
-					inputValue = SystemInput.inputNumberBetweenBy(1, 5);
-					switch (inputValue) {
+					int subMenuInput = SystemInput.inputNumberBetweenBy(1, 5);
+					switch (subMenuInput) {
 						case 1:
 //							saleMenu();
-							break;
 						case 2:
 //							refundCard();
 							break;
@@ -87,7 +86,7 @@ public class MartPosSystem {
 							System.out.println("══════════════════════════════════════════");
 							System.out.println("              메인 메뉴로 돌아갑니다.");
 							System.out.println("══════════════════════════════════════════");
-							mainBack = true;
+							isMainMenuReturned = true;
 							break;
 						default:
 							System.out.println("══════════════════════════════════════════");
@@ -96,15 +95,15 @@ public class MartPosSystem {
 							break;
 					}
 				}
-			} else if (inputValue == 6) {
+			} else if (mainMenuInput == 6) {
 				currentTime = LocalDateTime.now();
 				user.setLogOutTime(currentTime);
 
-				int minutes1 = user.getLoginTime().getMinute();
-				int minutes2 = user.getLogOutTime().getMinute();
+				int loginTime = user.getLoginTime().getMinute();
+				int logoutTime = user.getLogOutTime().getMinute();
 				int dailyWagePerMinute = 9_800;
-				int workTime = minutes2 - minutes1;
-				user.setDailyWage((minutes2 - minutes1) * dailyWagePerMinute);
+				int workTime = logoutTime - loginTime;
+				user.setDailyWage(workTime * dailyWagePerMinute);
 
 				System.out.println("══════════════════════════════════════════");
 				System.out.printf("               일한 시간 : %d 분\n",workTime);
@@ -113,7 +112,7 @@ public class MartPosSystem {
 				System.out.printf("               일당 : %s (원)\n",user.getDailyWage());
 				System.out.println("══════════════════════════════════════════");
 				printProductStar();
-				worked = false;
+				isWorking = false;
 			}
 		}
 	}
