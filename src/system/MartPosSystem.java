@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 import db.Products;
 import db.User;
+import logic.DailyWage;
 import logic.Login;
+import logic.Logout;
 
 import static db.Products.*;
 import static view.SystemInput.inputNumberBetweenBy;
@@ -16,13 +18,16 @@ public class MartPosSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		User user = User.getInstance();
+		Login login = new Login();
+		Logout logout = new Logout();
+		DailyWage dailyWage = new DailyWage();
+
 		setInitProductsSize(10);
 		List<Products> products = generateInitProducts();
 
 //		Products products = new Products(null, 0, 0, false, null);
-		User user = new User();
-		Login login = new Login();
-		LocalDateTime currentTime;
+//		User user = new User();
 //		Sale sale = new Sale(null, 0, 0, false, null);
 //		ExpirationDate ed = new ExpirationDate(null, 0, 0, false, null);
 		Scanner scanner = new Scanner(System.in);
@@ -34,21 +39,21 @@ public class MartPosSystem {
 		showLoginComments();
 		isUserlogined = login.isLogined();
 
-		while(!isUserlogined) {
+		while(true) {
 			showInputIdComments();
-			String inputId = scanner.nextLine().trim();
+			String inputUserId = scanner.nextLine().trim();
 			showInputPasswordComments();
-			String inputPW = scanner.nextLine().trim();
-			login.checkUserInfo(inputId, inputPW); // 유저 정보 체크
+			String inputUserPassword = scanner.nextLine().trim();
+			login.ckeckUserInfoFrom(inputUserId, inputUserPassword);
 			isUserlogined = login.isLogined();
 			if (!isUserlogined) {
 				showOnLoginFailureComments();
+			} else {
+				break;
 			}
 		}
 
 		while (isWorking) {
-			currentTime = LocalDateTime.now();
-			user.setLoginTime(currentTime);
 			showMainMenuOptions();
 			int mainMenuInput = inputNumberBetweenBy(1, 6);
 			if (mainMenuInput == 1) {
@@ -85,23 +90,10 @@ public class MartPosSystem {
 					}
 				}
 			} else if (mainMenuInput == 6) {
-				currentTime = LocalDateTime.now();
-				user.setLogOutTime(currentTime);
-
-				int loginTime = user.getLoginTime().getMinute();
-				int logoutTime = user.getLogOutTime().getMinute();
-				int dailyWagePerMinute = 9_800;
-				int workTime = logoutTime - loginTime;
-				user.setDailyWage(workTime * dailyWagePerMinute);
-
-				System.out.println("══════════════════════════════════════════");
-				System.out.printf("               일한 시간 : %d 분\n",workTime);
-				System.out.println("══════════════════════════════════════════");
-				System.out.println("══════════════════════════════════════════");
-				System.out.printf("               일당 : %s (원)\n",user.getDailyWage());
-				System.out.println("══════════════════════════════════════════");
-				printProductStar();
 				isWorking = false;
+				logout.setLogOutTimeTo(LocalDateTime.now());
+				dailyWage.calculateDailyWageFrom(user.getLogInTime(), user.getLogOutTime());
+//				printProductStar();
 			}
 		}
 	}
