@@ -26,8 +26,6 @@ public class MartPosSystem {
 		setInitProductsSize(10);
 		List<Products> products = generateInitProducts();
 
-//		Products products = new Products(null, 0, 0, false, null);
-//		User user = new User();
 //		Sale sale = new Sale(null, 0, 0, false, null);
 //		ExpirationDate ed = new ExpirationDate(null, 0, 0, false, null);
 		Scanner scanner = new Scanner(System.in);
