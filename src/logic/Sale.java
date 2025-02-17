@@ -1,15 +1,14 @@
 package logic;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import db.TotalSale;
 import view.SystemInput;
-import view.SystemView;
 
 import static db.Products.getProducts;
+import static view.SystemView.showSaleProductMenuOptions;
 
 public class Sale extends TotalSale {
 	
@@ -43,7 +42,7 @@ public class Sale extends TotalSale {
 		isValidCardNumber = false;
 		continueSale = true;
 		while (!backSubMenued) {
-			SystemView.saleMenuView();
+			showSaleProductMenuOptions();
 			int inputValue = SystemInput.inputNumberBetweenBy(1, 3);
 			switch (inputValue) {
 				case 1:

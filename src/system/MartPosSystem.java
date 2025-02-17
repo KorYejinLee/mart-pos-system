@@ -7,10 +7,10 @@ import java.util.Scanner;
 import db.Products;
 import db.User;
 import logic.Login;
-import view.SystemInput;
-import view.SystemView;
 
 import static db.Products.*;
+import static view.SystemInput.inputNumberBetweenBy;
+import static view.SystemView.*;
 
 public class MartPosSystem {
 
@@ -30,38 +30,31 @@ public class MartPosSystem {
 		boolean isWorking = true;
 		boolean isMainMenuReturned = false;
 
-		SystemView.startView();
-		SystemView.loginView();
+		showSystemStartComments();
+		showLoginComments();
 		isUserlogined = login.isLogined();
 
 		while(!isUserlogined) {
-			System.out.println("══════════════════════════════════════════");
-			System.out.println("              ID를 입력해주세요.");
-			System.out.println("══════════════════════════════════════════");
+			showInputIdComments();
 			String inputId = scanner.nextLine().trim();
-			System.out.println("══════════════════════════════════════════");
-			System.out.println("           PASSWORD를 입력해주세요.");
-			System.out.println("══════════════════════════════════════════");
+			showInputPasswordComments();
 			String inputPW = scanner.nextLine().trim();
 			login.checkUserInfo(inputId, inputPW); // 유저 정보 체크
 			isUserlogined = login.isLogined();
-
 			if (!isUserlogined) {
-				System.out.println("══════════════════════════════════════════");
-				System.out.printf("%16s로그인 실패%-16s\n","","");
-				System.out.println("══════════════════════════════════════════");
+				showOnLoginFailureComments();
 			}
 		}
 
 		while (isWorking) {
 			currentTime = LocalDateTime.now();
 			user.setLoginTime(currentTime);
-			SystemView.mainMenuView();
-			int mainMenuInput = SystemInput.inputNumberBetweenBy(1, 6);
+			showMainMenuOptions();
+			int mainMenuInput = inputNumberBetweenBy(1, 6);
 			if (mainMenuInput == 1) {
 				showProducts(products);
 			} else if (mainMenuInput == 2) {
-				SystemView.balanceView();
+				showBalanceComments();
 //				showBalance();
 			} else if (mainMenuInput == 3) {
 //				showSale();
@@ -70,8 +63,8 @@ public class MartPosSystem {
 			} else if (mainMenuInput == 5) {
 				isMainMenuReturned = false;
 				while (!isMainMenuReturned) {
-					SystemView.subMenuView();
-					int subMenuInput = SystemInput.inputNumberBetweenBy(1, 5);
+					showSubMenuOptions();
+					int subMenuInput = inputNumberBetweenBy(1, 5);
 					switch (subMenuInput) {
 						case 1:
 //							saleMenu();
@@ -83,15 +76,11 @@ public class MartPosSystem {
 						case 4:
 							searchProductByName();
 						case 5:
-							System.out.println("══════════════════════════════════════════");
-							System.out.println("              메인 메뉴로 돌아갑니다.");
-							System.out.println("══════════════════════════════════════════");
+							backToMainMenuComments();
 							isMainMenuReturned = true;
 							break;
 						default:
-							System.out.println("══════════════════════════════════════════");
-							System.out.println("           올바른 메뉴 번호를 입력해주세요.");
-							System.out.println("══════════════════════════════════════════");
+							writeCorrectMenuNumbersComments();
 							break;
 					}
 				}

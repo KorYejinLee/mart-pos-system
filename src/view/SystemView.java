@@ -1,23 +1,41 @@
 package view;
 
 public class SystemView {
-	public static void loginView() {
+	public static void showLoginComments() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
-        System.out.println("║                 로그인                   ║");
+        System.out.println("║                 로그인                  ║");
         System.out.println("║                                        ║");
         System.out.println("╚════════════════════════════════════════╝");
 	}
 
-	public static void startView() {
+	public static void showSystemStartComments() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║            Mart POS System             ║");
         System.out.println("║                                        ║");
         System.out.println("╚════════════════════════════════════════╝");
 	}
+
+    public static void showInputIdComments() {
+        System.out.println("══════════════════════════════════════════");
+        System.out.println("              ID를 입력해주세요.");
+        System.out.println("══════════════════════════════════════════");
+    }
+
+    public static void showInputPasswordComments() {
+        System.out.println("══════════════════════════════════════════");
+        System.out.println("           PASSWORD를 입력해주세요.");
+        System.out.println("══════════════════════════════════════════");
+    }
+
+    public static void showOnLoginFailureComments() {
+        System.out.println("══════════════════════════════════════════");
+        System.out.printf("%16s로그인 실패%-16s\n","","");
+        System.out.println("══════════════════════════════════════════");
+    }
 	
-	public static void balanceView() {
+	public static void showBalanceComments() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║                Balance                 ║");
@@ -25,7 +43,7 @@ public class SystemView {
         System.out.println("╚════════════════════════════════════════╝");
 	}
 	
-	public static void mainMenuView() {
+	public static void showMainMenuOptions() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║                Main Menu               ║");
@@ -37,8 +55,20 @@ public class SystemView {
         System.out.println("      [5] 업무 시작\t[6] 업무 종료");
         System.out.println("══════════════════════════════════════════");
 	}
+
+    public static void backToMainMenuComments() {
+        System.out.println("══════════════════════════════════════════");
+        System.out.println("              메인 메뉴로 돌아갑니다.");
+        System.out.println("══════════════════════════════════════════");
+    }
+
+    public static void writeCorrectMenuNumbersComments() {
+        System.out.println("══════════════════════════════════════════");
+        System.out.println("           올바른 메뉴 번호를 입력해주세요.");
+        System.out.println("══════════════════════════════════════════");
+    }
 	
-	public static void subMenuView() {
+	public static void showSubMenuOptions() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║             Start Work Menu            ║");
@@ -53,7 +83,7 @@ public class SystemView {
         System.out.println("══════════════════════════════════════════");
 	}
 	
-	public static void saleMenuView() {
+	public static void showSaleProductMenuOptions() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║                                        ║");
         System.out.println("║              Sale Product              ║");
